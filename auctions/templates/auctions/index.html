@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Current Price</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for listing in listings %}
+                <tr>    
+                    <td><a href="{% url 'view_listing' listing.id %}">{{ listing.title }}</a></td>
+                    <td>{{ listing.description }}</td> 
+                    <td style="width: 10%">$ {{ listing.latest_price }}</td>
+                    <td><img src="media/{{ listing.image }}" alt="Image not found" style="max-height:300px"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>Check out past listings here:
+        <a href="{% url 'history' %}" class="badge badge-secondary">Inactive Listings</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Watchlist
+{% endblock %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+    
+    <table class="table">
+        <tr>
+            <th style="width: 40%;">Listing</th>
+            <th>Status</th>
+        </tr>
+        {% for item in watchlist %}
+            <tr>
+                {% for listing in listings %}
+                    {% if listing.title == item %}
+                        <td style="width: 40%;"><a href="{% url 'view_listing' listing.id %}">{{ item }}</a></td>
+                        {% if listing.status %}
+                            <td><div class="badge badge-pill badge-success">Active</div></td>
+                        {% else %}
+                            <td><div class="badge badge-pill badge-secondary">Inactive</div></td>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
